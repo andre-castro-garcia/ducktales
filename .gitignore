@@ -1,9 +1,12 @@
 .idea
 .vs
 *.user
+.sonarqube
 
 [Pp]roperties/
-bin/
-obj/
+src/**/bin/
+src/**/obj/
+test/**/bin/
+test/**/obj/
 
 coverage/
