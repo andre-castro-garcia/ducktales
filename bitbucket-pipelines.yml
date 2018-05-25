@@ -9,4 +9,4 @@ pipelines:
           script:
             - dotnet restore
             - dotnet build
-            - dotnet test test\ducktales.tests\ducktales.tests.csproj
+            - dotnet test test/ducktales.tests/ducktales.tests.csproj
