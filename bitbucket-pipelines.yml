@@ -8,5 +8,7 @@ pipelines:
             - dotnetcore
           script:
             - dotnet restore
+            - dotnet sonar/SonarScanner.MSBuild.dll begin /k:"ducktales" /d:sonar.organization="andre-castro-garcia-bitbucket" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login="bec3ceeae9799bfdc3a26f99597dc9ca21fe04bc"
             - dotnet build
+            - dotnet sonar/SonarScanner.MSBuild.dll end /d:sonar.login="bec3ceeae9799bfdc3a26f99597dc9ca21fe04bc"
             - dotnet test test/ducktales.tests/ducktales.tests.csproj
