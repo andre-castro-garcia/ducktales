@@ -1,6 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ducktales.api", "src\ducktales.api\ducktales.api.csproj", "{33D1EC39-E546-4BA3-84EF-E29974EA93CA}"
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2037
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ducktales.api", "src\ducktales.api\ducktales.api.csproj", "{33D1EC39-E546-4BA3-84EF-E29974EA93CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ducktales.tests", "test\ducktales.tests\ducktales.tests.csproj", "{1AFAB09F-18DF-412A-9BB4-15FDB2BC6D27}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -12,5 +17,15 @@ Global
 		{33D1EC39-E546-4BA3-84EF-E29974EA93CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33D1EC39-E546-4BA3-84EF-E29974EA93CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33D1EC39-E546-4BA3-84EF-E29974EA93CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AFAB09F-18DF-412A-9BB4-15FDB2BC6D27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AFAB09F-18DF-412A-9BB4-15FDB2BC6D27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AFAB09F-18DF-412A-9BB4-15FDB2BC6D27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AFAB09F-18DF-412A-9BB4-15FDB2BC6D27}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E854A17A-3174-4273-B70F-8FB032EC6FC2}
 	EndGlobalSection
 EndGlobal

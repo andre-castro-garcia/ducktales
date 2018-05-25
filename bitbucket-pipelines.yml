@@ -1,0 +1,12 @@
+image: microsoft/dotnet:sdk
+
+pipelines:
+  branches:
+    master:
+      - step:
+        caches:
+          - dotnetcore
+        script:
+          - dotnet restore
+          - dotnet build
+          - dotnet test
