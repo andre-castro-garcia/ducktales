@@ -12,9 +12,9 @@ test:
     - dotnet --version
     - dotnet build
   override:
-    - dotnet test
+    - "true"
     
 general:
   branches:
     only:
-      - "true"
+      - master
