@@ -1,13 +1,12 @@
 image: microsoft/dotnet:sdk
 
 pipelines:
-  default:
-    - step:
+  branches:
+    master:
+      - step:
         caches:
           - dotnetcore
         script:
-          - export TEST_NAME=test\ducktales.tests\ducktales.tests.csproj
           - dotnet restore
-          
           - dotnet build
-          - dotnet test $TEST_NAME
+          - dotnet test
