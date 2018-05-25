@@ -10,6 +10,11 @@ dependencies:
 test:
   pre:
     - dotnet --version
-    - dotnet build ./<solution-file-name>.sln
+    - dotnet build
   override:
     - dotnet test
+    
+general:
+  branches:
+    only:
+      - master
