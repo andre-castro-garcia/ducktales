@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ducktales.api", "src\ducktales.api\ducktales.api.csproj", "{33D1EC39-E546-4BA3-84EF-E29974EA93CA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{33D1EC39-E546-4BA3-84EF-E29974EA93CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33D1EC39-E546-4BA3-84EF-E29974EA93CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33D1EC39-E546-4BA3-84EF-E29974EA93CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33D1EC39-E546-4BA3-84EF-E29974EA93CA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
