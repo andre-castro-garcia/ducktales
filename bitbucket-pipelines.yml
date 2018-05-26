@@ -1,4 +1,4 @@
-image: microsoft/dotnet:sdk
+image: andrecastrogarcia/dotnet-sonar:latest
 
 pipelines:
   branches:
@@ -7,14 +7,8 @@ pipelines:
           caches:
             - dotnetcore
           script:
-            - chmod +x sonar/sonar-scanner-3.1.0.1141/bin/sonar-scanner
-            
-            - apt-get update
-            - apt-get -y install default-jre
-            - export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
-            
             - dotnet restore
-            - dotnet sonar/SonarScanner.MSBuild.dll begin /k:"ducktales" /d:sonar.organization="andre-castro-garcia-bitbucket" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login="bec3ceeae9799bfdc3a26f99597dc9ca21fe04bc" /d:sonar.cs.opencover.reportsPaths="test/ducktales.tests/coverage/coverage.xml"
+            - dotnet /sonar/SonarScanner.MSBuild.dll begin /k:"ducktales" /d:sonar.organization="andre-castro-garcia-bitbucket" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login="bec3ceeae9799bfdc3a26f99597dc9ca21fe04bc" /d:sonar.cs.opencover.reportsPaths="test/ducktales.tests/coverage/coverage.xml"
             - dotnet build
             - dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutputDirectory=coverage /p:Exclude="[NUnit3.*]*" test/ducktales.tests/ducktales.tests.csproj
-            - dotnet sonar/SonarScanner.MSBuild.dll end /d:sonar.login="bec3ceeae9799bfdc3a26f99597dc9ca21fe04bc"
+            - dotnet /sonar/SonarScanner.MSBuild.dll end /d:sonar.login="bec3ceeae9799bfdc3a26f99597dc9ca21fe04bc"
