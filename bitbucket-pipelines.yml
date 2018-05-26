@@ -7,9 +7,12 @@ pipelines:
           caches:
             - dotnetcore
           script:
-            - export JAVA_HOME /usr/lib/jvm/java-7-openjdk-amd64
-            - apt-get install -y openjdk-7-jre
             - chmod +x sonar/sonar-scanner-3.1.0.1141/bin/sonar-scanner
+            
+            - powershell (new-object System.Net.WebClient).Downloadfile('http://javadl.oracle.com/webapps/download/AutoDL?BundleId=210185', 'C:\jre-8u91-windows-x64.exe')
+            - powershell start-process -filepath C:\jre-8u91-windows-x64.exe -passthru -wait -argumentlist "/s,INSTALLDIR=c:\Java\jre1.8.0_91,/L,install64.log"
+            - powershell [Environment]::SetEnvironmentVariable("Path", $env:Path + ";c:\Java\jre1.8.0_91", [EnvironmentVariableTarget]::Machine)
+            
             - dotnet restore
             - dotnet sonar/SonarScanner.MSBuild.dll begin /k:"ducktales" /d:sonar.organization="andre-castro-garcia-bitbucket" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login="bec3ceeae9799bfdc3a26f99597dc9ca21fe04bc"
             - dotnet build
