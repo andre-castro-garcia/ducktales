@@ -14,9 +14,9 @@ pipelines:
             - dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutputDirectory=coverage /p:Exclude="[NUnit3.*]*" test/ducktales.tests/ducktales.tests.csproj
             - dotnet /sonar/SonarScanner.MSBuild.dll end /d:sonar.login="bec3ceeae9799bfdc3a26f99597dc9ca21fe04bc"
       - step:
-          name: Deploy to Docker HUB
+          name: Deploy to Docker Hub
           deployment: production
-          image: atlassian/pipelines-docker-daemon
+          image: atlassian/pipelines-awscli
           services:
             - docker
           script:
