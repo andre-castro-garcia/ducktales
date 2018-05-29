@@ -25,8 +25,9 @@ pipelines:
             - export DOCKER_HUB_USERNAME=andrecastrogarcia
             - export DOCKER_HUB_PASSWORD=It3r1509
             # Docker variables
-            - export IMAGE_NAME="${DOCKER_HUB_USERNAME}/${BITBUCKET_REPO_SLUG}:${BITBUCKET_BUILD_NUMBER}"
+            - export IMAGE_NAME="${DOCKER_HUB_USERNAME}/${BITBUCKET_REPO_SLUG}"
             # Deploying an image built from pipelines
             - docker build -t "${IMAGE_NAME}" .
             - docker login --username "${DOCKER_HUB_USERNAME}" --password "${DOCKER_HUB_PASSWORD}"
+            - docker tag "${IMAGE_NAME}" "${IMAGE_NAME}":"${BITBUCKET_BUILD_NUMBER}"
             - docker push "${IMAGE_NAME}"
