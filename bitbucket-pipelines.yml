@@ -47,13 +47,13 @@ pipelines:
             
             # Docker Hub Vars
             - export DOCKER_HUB_USERNAME="andrecastrogarcia"
-            - export IMAGE_NAME="${DOCKER_HUB_USERNAME}/${BITBUCKET_REPO_SLUG}"
+            - export IMAGE_NAME="docker.io/${DOCKER_HUB_USERNAME}/${BITBUCKET_REPO_SLUG}:latest"
             
             # Create ECS cluster, task, service
             - aws ecs list-clusters | grep "${ECS_CLUSTER_NAME}" || aws ecs create-cluster --cluster-name "${ECS_CLUSTER_NAME}"
             
             # Updating the existing cluster, task, service
-            - export TASK_VERSION=$(aws ecs register-task-definition --family "${ECS_TASK_NAME}" --container-definitions '[{"name":"app","image":"'"${IMAGE_NAME}"'","memory":1024}]' | jq --raw-output '.taskDefinition.revision')
+            - export TASK_VERSION=$(aws ecs register-task-definition --family "${ECS_TASK_NAME}" --container-definitions '[{"name":"ducktales","image":"'"${IMAGE_NAME}"'","memory":1024}]' | jq --raw-output '.taskDefinition.revision')
             - echo "Registered ECS Task Definition:" "${TASK_VERSION}"
             
             # Create ECS Service
