@@ -3,10 +3,17 @@
 *.user
 .sonarqube
 
+out/
+
 [Pp]roperties/
 src/**/bin/
 src/**/obj/
+src/**/out/
+src/**/app/
+
 test/**/bin/
 test/**/obj/
+test/**/out/
+test/**/app/
 
 coverage/

@@ -8,26 +8,22 @@ using Microsoft.AspNetCore.TestHost;
 using NUnit.Framework;
 using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
-namespace ducktales.tests
-{
+namespace ducktales.tests {
     [ExcludeFromCodeCoverage]
-    public class WebApiTests
-    {
-        private TestServer _server;
+    public class WebApiTests {
         private HttpClient _client;
+        private TestServer _server;
 
         [OneTimeSetUp]
-        public void Setup()
-        {
-            Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", EnvironmentName.Development); 
+        public void Setup() {
+            Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", EnvironmentName.Development);
 
             _server = new TestServer(new WebHostBuilder().UseStartup<Startup>());
             _client = _server.CreateClient();
         }
 
         [Test]
-        public async Task ReturnHelloWorld()
-        {
+        public async Task ReturnHelloWorld() {
             var response = await _client.GetAsync("/");
             response.EnsureSuccessStatusCode();
 
@@ -35,6 +31,5 @@ namespace ducktales.tests
 
             Assert.AreEqual("Hello World!", responseString);
         }
-
     }
 }
