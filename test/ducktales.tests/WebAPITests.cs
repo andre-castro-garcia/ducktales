@@ -17,7 +17,7 @@ namespace ducktales.tests {
         [OneTimeSetUp]
         public void Setup() {
             Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", EnvironmentName.Development);
-
+            
             _server = new TestServer(new WebHostBuilder().UseStartup<Startup>());
             _client = _server.CreateClient();
         }
