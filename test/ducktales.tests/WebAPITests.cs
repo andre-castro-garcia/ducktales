@@ -29,7 +29,7 @@ namespace ducktales.tests {
 
             var responseString = await response.Content.ReadAsStringAsync();
 
-            Assert.AreEqual("Hello World!", responseString);
+            Assert.AreEqual("Hello World Ducktales!", responseString);
         }
     }
 }
