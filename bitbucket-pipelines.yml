@@ -15,7 +15,6 @@ pipelines:
             - dotnet /sonar/SonarScanner.MSBuild.dll end /d:sonar.login="bec3ceeae9799bfdc3a26f99597dc9ca21fe04bc"
       - step:
           name: Deploy to Docker Hub
-          deployment: production
           image: atlassian/pipelines-awscli
           services:
             - docker
@@ -31,3 +30,34 @@ pipelines:
             - docker login --username "${DOCKER_HUB_USERNAME}" --password "${DOCKER_HUB_PASSWORD}"
             - docker tag "${IMAGE_NAME}" "${IMAGE_NAME}":"${BITBUCKET_BUILD_NUMBER}"
             - docker push "${IMAGE_NAME}"
+      - step:
+          name: Deploy to ECS
+          deployment: production
+          image: atlassian/pipelines-awscli
+          script:
+            # AWS authentication variables
+            - export AWS_ACCESS_KEY_ID="AKIAJSAL5BBXGQSCCSQA"
+            - export AWS_SECRET_ACCESS_KEY="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"
+            - export AWS_DEFAULT_REGION="sa-east-1"
+            
+            # ECS variables
+            - export ECS_CLUSTER_NAME="default"
+            - export ECS_SERVICE_NAME="ducktales"
+            - export ECS_TASK_NAME="${BITBUCKET_REPO_SLUG}"
+            
+            # Docker Hub Vars
+            - export DOCKER_HUB_USERNAME="andrecastrogarcia"
+            - export IMAGE_NAME="${DOCKER_HUB_USERNAME}/${BITBUCKET_REPO_SLUG}"
+            
+            # Create ECS cluster, task, service
+            - aws ecs list-clusters | grep "${ECS_CLUSTER_NAME}" || aws ecs create-cluster --cluster-name "${ECS_CLUSTER_NAME}"
+            
+            # Updating the existing cluster, task, service
+            - export TASK_VERSION=$(aws ecs register-task-definition --family "${ECS_TASK_NAME}" --container-definitions '[{"name":"app","image":"'"${IMAGE_NAME}"'","memory":1024}]' | jq --raw-output '.taskDefinition.revision')
+            - echo "Registered ECS Task Definition:" "${TASK_VERSION}"
+            
+            # Create ECS Service
+            - aws ecs list-services --cluster "${ECS_CLUSTER_NAME}"  | grep "${ECS_SERVICE_NAME}" || aws ecs create-service --service-name "${ECS_SERVICE_NAME}" --cluster "${ECS_CLUSTER_NAME}" --task-definition "${ECS_TASK_NAME}" --desired-count 1
+            - aws ecs update-service --cluster "${ECS_CLUSTER_NAME}" --service "${ECS_SERVICE_NAME}" --task-definition "${ECS_TASK_NAME}:${TASK_VERSION}"
+            
+            
