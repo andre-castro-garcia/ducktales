@@ -34,7 +34,7 @@ pipelines:
             # Configure kubectl
             - kubectl config set-cluster $KUBERNETES_CLUSTER_NAME --server=$KUBERNETES_CLUSTER_HOST
             - kubectl config set-credentials ducktales.k8s.local-basic-auth --username=$KUBERNETES_USERNAME --password=$KUBERNETES_PASSWORD
-            - kubectl config set-context ducktales.k8s.local --cluster=$KUBERNETES_CLUSTER_NAME --user=$KUBERNETES_USERNAME
+            - kubectl config set-context ducktales.k8s.local --cluster=$KUBERNETES_CLUSTER_NAME --user=ducktales.k8s.local-basic-auth
             - kubectl config use-context ducktales.k8s.local
             # Update the deployment to use the new Docker image
             - kubectl set image deployment ducktales-api ducktales-api=andrecastrogarcia/ducktales:$BITBUCKET_BUILD_NUMBER
