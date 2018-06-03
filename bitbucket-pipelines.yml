@@ -32,7 +32,7 @@ pipelines:
           image: atlassian/pipelines-kubectl
           script:
             # Configure kubectl
-            - kubectl config set-cluster $KUBERNETES_CLUSTER_NAME --server=$KUBERNETES_CLUSTER_NAME
+            - kubectl config set-cluster $KUBERNETES_CLUSTER_NAME --server=$KUBERNETES_CLUSTER_HOST
             - kubectl config set-credentials ducktales.k8s.local-basic-auth --username=$KUBERNETES_USERNAME --password=$KUBERNETES_PASSWORD
             - kubectl config set-context ducktales.k8s.local --cluster=$KUBERNETES_CLUSTER_NAME --user=$KUBERNETES_USERNAME
             - kubectl config use-context ducktales.k8s.local
