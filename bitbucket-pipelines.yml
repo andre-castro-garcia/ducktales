@@ -15,6 +15,16 @@ pipelines:
   branches:
     master:
       - step:
+          name: Build and Test
+          caches:
+            - dotnetcore
+          script:
+            - dotnet restore
+            - dotnet /sonar/SonarScanner.MSBuild.dll begin /k:"ducktales" /d:sonar.organization="$SONAR_ORGANIZATION" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login="$SONAR_PROJECT_LOGIN" /d:sonar.cs.opencover.reportsPaths="test/ducktales.tests/coverage/coverage.xml"
+            - dotnet build
+            - dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutputDirectory=coverage /p:Exclude="[NUnit3.*]*" test/ducktales.tests/ducktales.tests.csproj
+            - dotnet /sonar/SonarScanner.MSBuild.dll end /d:sonar.login="$SONAR_PROJECT_LOGIN"
+      - step:
           name: Deploy to Docker Hub
           image: atlassian/pipelines-awscli
           services:
