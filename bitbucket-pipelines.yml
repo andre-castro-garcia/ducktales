@@ -1,40 +1,14 @@
 image: andrecastrogarcia/dotnet-sonar:latest
 
 pipelines:
-  branches:
-    master:
-      - step:
-          name: Build and Test
-          caches:
-            - dotnetcore
-          script:
-            - dotnet restore
-            - dotnet /sonar/SonarScanner.MSBuild.dll begin /k:"ducktales" /d:sonar.organization="$SONAR_ORGANIZATION" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login="$SONAR_PROJECT_LOGIN" /d:sonar.cs.opencover.reportsPaths="test/ducktales.tests/coverage/coverage.xml"
-            - dotnet build
-            - dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutputDirectory=coverage /p:Exclude="[NUnit3.*]*" test/ducktales.tests/ducktales.tests.csproj
-            - dotnet /sonar/SonarScanner.MSBuild.dll end /d:sonar.login="$SONAR_PROJECT_LOGIN"
-      - step:
-          name: Deploy to Docker Hub
-          image: atlassian/pipelines-awscli
-          services:
-            - docker
-          script:
-            # Docker variables
-            - export IMAGE_NAME="$DOCKER_HUB_USERNAME/${BITBUCKET_REPO_SLUG}"
-            # Deploying an image built from pipelines
-            - docker build -t "${IMAGE_NAME}" .
-            - docker login --username "$DOCKER_HUB_USERNAME" --password "$DOCKER_HUB_PASSWORD"
-            - docker tag "${IMAGE_NAME}" "${IMAGE_NAME}":"${BITBUCKET_BUILD_NUMBER}"
-            - docker push "${IMAGE_NAME}"
-      - step:
-          name: Deploy to AWS Kubernetes
-          deployment: production
-          image: atlassian/pipelines-kubectl
-          script:
-            # Configure kubectl
-            - kubectl config set-cluster $KUBERNETES_CLUSTER_NAME --server=$KUBERNETES_CLUSTER_HOST --insecure-skip-tls-verify=true
-            - kubectl config set-credentials ducktales.k8s.local-basic-auth --username=$KUBERNETES_USERNAME --password=$KUBERNETES_PASSWORD
-            - kubectl config set-context ducktales.k8s.local --cluster=$KUBERNETES_CLUSTER_NAME --user=ducktales.k8s.local-basic-auth
-            - kubectl config use-context ducktales.k8s.local
-            # Update the deployment to use the new Docker image
-            - kubectl set image deployment ducktales-api ducktales-api=andrecastrogarcia/ducktales:$BITBUCKET_BUILD_NUMBER --insecure-skip-tls-verify=true
+  default:
+    - step:
+        name: Sonar Quality Gate
+        caches:
+          - dotnetcore
+        script:
+          - dotnet restore
+          - dotnet /sonar/SonarScanner.MSBuild.dll begin /k:"ducktales" /d:sonar.branch.name="$BITBUCKET_BRANCH" /d:sonar.branch.target="master" /d:sonar.organization="$SONAR_ORGANIZATION" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login="$SONAR_PROJECT_LOGIN" /d:sonar.cs.opencover.reportsPaths="test/ducktales.tests/coverage/coverage.xml"
+          - dotnet build
+          - dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutputDirectory=coverage /p:Exclude="[NUnit3.*]*" test/ducktales.tests/ducktales.tests.csproj
+          - dotnet /sonar/SonarScanner.MSBuild.dll end /d:sonar.login="$SONAR_PROJECT_LOGIN"
