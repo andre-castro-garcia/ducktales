@@ -1,6 +1,6 @@
 ![QualityGate](https://sonarcloud.io/api/project_badges/quality_gate?project=ducktales)
 
-  
+  Recurso de Teste
   
 ![Coverage](https://sonarcloud.io/api/project_badges/measure?project=ducktales&metric=coverage)
 ![DuplicateLines](https://sonarcloud.io/api/project_badges/measure?project=ducktales&metric=duplicated_lines_density)
