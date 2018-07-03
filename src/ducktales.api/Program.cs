@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore;
+﻿using System.Diagnostics.CodeAnalysis;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
 namespace ducktales.api {
+    [ExcludeFromCodeCoverage]
     public static class Program {
         public static void Main(string[] args) {
             BuildWebHost(args).Run();
