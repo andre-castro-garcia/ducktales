@@ -15,6 +15,10 @@ ProjectSection(SolutionItems) = preProject
 	Dockerfile = Dockerfile
 EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ducktales.data", "src\ducktales.data\ducktales.data.csproj", "{C23E3C53-D4EC-46B2-8B1F-474EB712F08D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ducktales.models", "src\ducktales.models\ducktales.models.csproj", "{82080387-2FBB-4616-9E58-9266D3C97431}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +33,14 @@ Global
 		{1AFAB09F-18DF-412A-9BB4-15FDB2BC6D27}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1AFAB09F-18DF-412A-9BB4-15FDB2BC6D27}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1AFAB09F-18DF-412A-9BB4-15FDB2BC6D27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C23E3C53-D4EC-46B2-8B1F-474EB712F08D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C23E3C53-D4EC-46B2-8B1F-474EB712F08D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C23E3C53-D4EC-46B2-8B1F-474EB712F08D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C23E3C53-D4EC-46B2-8B1F-474EB712F08D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82080387-2FBB-4616-9E58-9266D3C97431}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82080387-2FBB-4616-9E58-9266D3C97431}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82080387-2FBB-4616-9E58-9266D3C97431}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82080387-2FBB-4616-9E58-9266D3C97431}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

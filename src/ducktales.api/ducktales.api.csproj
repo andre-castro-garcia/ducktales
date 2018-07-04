@@ -12,4 +12,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ducktales.data\ducktales.data.csproj" />
+  </ItemGroup>
 </Project>
