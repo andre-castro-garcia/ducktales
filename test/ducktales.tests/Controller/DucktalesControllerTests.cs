@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Threading.Tasks;
 using ducktales.api.Controllers;
 using ducktales.data.Interfaces;
 using ducktales.models;
@@ -9,6 +10,7 @@ using NUnit.Framework;
 
 namespace ducktales.tests.Controller {
     
+    [ExcludeFromCodeCoverage]
     [TestFixture]
     public class DucktalesControllerTests {
         

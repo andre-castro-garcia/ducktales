@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace ducktales.models {
     
-    public class SafeBox : IEquatable<SafeBox> {
+    public sealed class SafeBox : IEquatable<SafeBox> {
         
         public SafeBox(List<Coin> coins) {
             Coins = coins;
