@@ -23,6 +23,11 @@ namespace ducktales.tests.Models {
             Assert.IsTrue(_fiveCoin >= _firstCoin);
             Assert.IsTrue(_fiveCoin <= _firstCoin);
         }
+
+        [Test]
+        public void CheckHashCode() {
+            Assert.IsTrue(_firstCoin.GetHashCode() == 0);
+        }
     }
 }
 

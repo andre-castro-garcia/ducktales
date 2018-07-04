@@ -21,13 +21,13 @@ namespace ducktales.tests.Repositories {
         public void Setup() {
             _ungleScroogeRepository = new UncleScroogeRepository();
         }
-
+        
         [Test]
         public async Task Should_GetSafeBox_CorrectResponse() {
             var expected = JsonConvert.DeserializeObject<SafeBox>(ExpectedResponse);
             var result = await _ungleScroogeRepository.GetSafeBox();
             
-            Assert.IsTrue(expected.Equals(result));
+            Assert.IsTrue(result.Equals(expected));
         }
         
         [Test]
@@ -35,7 +35,7 @@ namespace ducktales.tests.Repositories {
             var expected = JsonConvert.DeserializeObject<SafeBox>(IncorrectResponse);
             var result = await _ungleScroogeRepository.GetSafeBox();
             
-            Assert.IsFalse(expected.Equals(result));
+            Assert.IsFalse(result.Equals(expected));
         }
         
         [Test]
@@ -43,7 +43,7 @@ namespace ducktales.tests.Repositories {
             var expected = JsonConvert.DeserializeObject<SafeBox>(IncorrectCoinResponse);
             var result = await _ungleScroogeRepository.GetSafeBox();
             
-            Assert.IsFalse(expected.Equals(result));
+            Assert.IsFalse(result.Equals(expected));
         }
     }
 }

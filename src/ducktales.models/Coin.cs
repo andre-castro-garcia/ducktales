@@ -6,7 +6,7 @@ using System;
 
 namespace ducktales.models {
     
-    public sealed class Coin : IComparable<Coin>, IEquatable<Coin> {
+    public sealed class Coin : IComparable<Coin> {
 
         public Coin(decimal weight, decimal value) {
             Weight = weight;
@@ -22,8 +22,14 @@ namespace ducktales.models {
             return weight == 0 ? weight : Value.CompareTo(other.Value);
         }
 
-        public bool Equals(Coin other) {
-            return Weight.Equals(other.Weight) && Value.Equals(other.Value);
+        public override bool Equals(object obj) {
+            if (ReferenceEquals(null, obj)) 
+                return false;
+            if (ReferenceEquals(this, obj)) 
+                return true;
+
+            var coin = obj as Coin;
+            return coin != null && Weight.Equals(coin.Weight) && Value.Equals(coin.Value);
         }
 
         public override int GetHashCode() {
