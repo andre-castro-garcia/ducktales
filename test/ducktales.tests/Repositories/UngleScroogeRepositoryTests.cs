@@ -14,6 +14,8 @@ namespace ducktales.tests.Repositories {
         private UncleScroogeRepository _ungleScroogeRepository;
 
         private const string ExpectedResponse = "{'coins':[{'weight':0.01,'value':0.25},{'weight':0.01,'value':0.25}]}";
+        private const string IncorrectResponse = "{'coins':[{'weight':0.01,'value':0.25}]}";
+        private const string IncorrectCoinResponse = "{'coins':[{'weight':0.01,'value':0.25},{'weight':0.01,'value':0.26}]}";
 
         [SetUp]
         public void Setup() {
@@ -26,6 +28,22 @@ namespace ducktales.tests.Repositories {
             var result = await _ungleScroogeRepository.GetSafeBox();
             
             Assert.IsTrue(expected.Equals(result));
-        } 
+        }
+        
+        [Test]
+        public async Task Should_GetSafeBox_IncorrectResponse() {
+            var expected = JsonConvert.DeserializeObject<SafeBox>(IncorrectResponse);
+            var result = await _ungleScroogeRepository.GetSafeBox();
+            
+            Assert.IsFalse(expected.Equals(result));
+        }
+        
+        [Test]
+        public async Task Should_GetSafeBox_IncorrectCoinResponse() {
+            var expected = JsonConvert.DeserializeObject<SafeBox>(IncorrectCoinResponse);
+            var result = await _ungleScroogeRepository.GetSafeBox();
+            
+            Assert.IsFalse(expected.Equals(result));
+        }
     }
 }
