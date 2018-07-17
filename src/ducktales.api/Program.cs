@@ -10,6 +10,10 @@ namespace ducktales.api {
         }
 
         private static IWebHost BuildWebHost(string[] args) {
+            // To open only one thread, set the environment variables bellow:
+            // -----------------------------------------------------------------
+            // ComPlus_ThreadPool_ForceMinWorkerThreads=1
+            // ComPlus_ThreadPool_ForceMaxWorkerThreads=1
             return WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
                 .UseUrls("http://0.0.0.0:5000") // Take that, Docker port forwarding!!!
